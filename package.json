@@ -1,10 +1,11 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "get-merged-pull-requests-action",
+  "version": "0.0.1",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Compare 2 tags and retrieve all pull requests merged between them",
   "main": "lib/main.js",
   "scripts": {
+    "dev": "ts-node src/main.ts",
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
@@ -15,19 +16,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/VanOns/get-merged-pull-requests-action.git"
   },
   "keywords": [
     "actions",
-    "node",
-    "setup"
+    "github",
+    "pull requests"
   ],
-  "author": "",
+  "author": "Van Ons",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.10.0"
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
   },
   "devDependencies": {
+    "@octokit/openapi-types": "^18.0.0",
     "@types/node": "^18.16.3",
     "@typescript-eslint/parser": "^5.59.2",
     "@vercel/ncc": "^0.36.1",
@@ -38,6 +41,7 @@
     "js-yaml": "^4.1.0",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }
 }
