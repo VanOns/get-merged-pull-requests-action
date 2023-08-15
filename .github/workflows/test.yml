@@ -12,15 +12,13 @@ jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Checkout
-        run: |
-          npm install
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
       - name: Run all scripts
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm run all
+          INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npm run all
   get-prs: # make sure we can actually execute the action
     runs-on: ubuntu-latest
     steps:
