@@ -2,24 +2,24 @@ name: Get merged pull requests
 description: Compare 2 tags and retrieve all pull requests merged between them.
 author: Van Ons
 inputs:
-  github_token:
+  github-token:
     description: The GitHub token to use.
     required: true
   repo:
     description: 'The repository to use. Defaults to current repository. Expected format: owner/repo.'
     required: false
-  current_tag:
+  current-tag:
     description: The current tag to use. Defaults to current/latest tag.
     required: false
-  previous_tag:
+  previous-tag:
     description: The previous tag to use. Defaults to one tag before the current tag.
     required: false
-  return_type:
+  return-type:
     description: 'What data to return. Options are: title_only (default), all.'
     required: false
-    default: default
+    default: title_only
 outputs:
-  pull_requests:
+  pull-requests:
     description: The pull requests merged between the 2 tags.
 runs:
   using: node16

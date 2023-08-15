@@ -18,11 +18,11 @@ jobs:
         uses: ./
         id: pull-requests
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 #          repo: ${{ github.repository }}
-#          current_tag: ${{ github.ref }}
-#          previous_tag: ${{ github.ref }}
-#          return_type: all
+#          current-tag: ${{ github.ref }}
+#          previous-tag: ${{ github.ref }}
+#          return-type: all
       - name: Print merged pull requests
         run: |
           echo "Pull requests:\n"
