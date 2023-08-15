@@ -25,7 +25,7 @@ jobs:
 #          return-type: all
       - name: Print merged pull requests
         run: |
-          if jq -e . > /dev/null 2>&1 <<< "${{ steps.pull-requests.outputs.pull-requests }}"; then
+          if jq -e . >/dev/null 2>&1 <<<"${{ steps.pull-requests.outputs.pull-requests }}"; then
             echo "The following pull requests were merged between the current and previous tag:"
             echo "${{ steps.pull-requests.outputs.pull-requests }}" | jq -r '.[].title' | while read -r title; do
               echo "- $title"
