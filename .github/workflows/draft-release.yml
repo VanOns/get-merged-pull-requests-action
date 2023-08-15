@@ -5,10 +5,10 @@ on:
     branches:
       - main
       - 'releases/*'
-  pull_request:
-    types: [opened, reopened, synchronize]
-  pull_request_target:
-    types: [opened, reopened, synchronize]
+#  pull_request:
+#    types: [opened, reopened, synchronize]
+#  pull_request_target:
+#    types: [opened, reopened, synchronize]
 
 jobs:
   draft-release:
