@@ -1,6 +1,6 @@
 {
   "name": "get-merged-pull-requests-action",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "GitHub action that compares 2 tags and retrieves all pull requests merged between them.",
   "main": "lib/main.js",
