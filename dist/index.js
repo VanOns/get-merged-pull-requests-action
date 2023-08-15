@@ -41,6 +41,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const ALLOWED_RETURN_TYPES = ['title_only', 'all'];
+const DEFAULT_RETURN_TYPE = 'title_only';
 const getRepo = () => {
     var _a, _b, _c, _d;
     const repo = core.getInput('repo');
@@ -84,6 +86,13 @@ const getPreviousTag = (client, repo, currentTag) => __awaiter(void 0, void 0, v
     }
     return tags.data[index + 1].name;
 });
+const getReturnType = () => {
+    const returnType = core.getInput('return_type');
+    if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
+        return returnType;
+    }
+    return DEFAULT_RETURN_TYPE;
+};
 const getCommits = (client, repo, currentTag, previousTag) => __awaiter(void 0, void 0, void 0, function* () {
     const commits = yield client.rest.repos.compareCommitsWithBasehead({
         owner: repo.owner,
@@ -101,8 +110,6 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
     let hashes = [];
     for (let i = 0; i < commits.length; i++) {
         hashes.push(commits[i].sha);
-        // eslint-disable-next-line no-console
-        console.log('MAX?', i === commits.length - 1);
         if (i % 5 === 0 || i === commits.length - 1) {
             const newItems = (yield client.rest.search.issuesAndPullRequests({
                 q: `repo:${repo.owner}/${repo.repo}+SHA:${hashes.join(',')}`
@@ -112,7 +119,14 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
             yield new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
-    return items;
+    switch (getReturnType()) {
+        case 'all':
+            return items;
+        default:
+            return items.map(item => ({
+                title: item.title
+            }));
+    }
 });
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const githubToken = core.getInput('github_token');

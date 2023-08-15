@@ -1,5 +1,5 @@
 name: Get merged pull requests
-description: Compare 2 tags and retrieve all pull requests merged between them
+description: Compare 2 tags and retrieve all pull requests merged between them.
 author: Van Ons
 inputs:
   github_token:
