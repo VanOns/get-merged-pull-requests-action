@@ -25,11 +25,11 @@ jobs:
 #          return-type: all
       - name: Print merged pull requests
         run: |
-          if [ -z "${{ steps.pull-requests.outputs.pull-requests }}" ]; then
-            echo "No pull requests were merged between the current and previous tag."
-          else
+          if (( ${#steps.pull-requests.outputs.pull-requests[@]} )); then
             echo "The following pull requests were merged between the current and previous tag:"
-            for pull_request in ${{ steps.pull-requests.outputs.pull-requests }}; do
-              echo "- $pull_request"
+            echo "${{ steps.pull-requests.outputs.pull-requests }}" | jq -r '.[].title' | while read -r title; do
+              echo "- $title"
             done
+          else
+            echo "No pull requests were merged between the current and previous tag."
           fi
