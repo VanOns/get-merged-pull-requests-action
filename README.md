@@ -16,11 +16,11 @@ Compare 2 tags and retrieve all pull requests merged between them.
 
 The pull requests are returned in a certain format, depending on the `return_type` value:
 
-- **title_only (default)**
+- **`title_only` (default)**
   ```json
-  [{ "title": "Title of the pull request" }]
+  [{"title": "Title of the pull request"}]
   ```
-- **all**: see [here](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests) for a full overview.
+- **`all`**: see [here](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests) for a full overview.
 
 # Usage
 
