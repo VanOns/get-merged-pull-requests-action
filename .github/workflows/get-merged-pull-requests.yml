@@ -26,7 +26,7 @@ jobs:
       - name: Print merged pull requests
         run: |
           if [ -z "${{ steps.pull-requests.outputs.pull-requests }}" ]; then
-            echo "No pull requests wered merged between the current and previous tag."
+            echo "No pull requests were merged between the current and previous tag."
           else
             echo "The following pull requests were merged between the current and previous tag:"
             for pull_request in ${{ steps.pull-requests.outputs.pull-requests }}; do
