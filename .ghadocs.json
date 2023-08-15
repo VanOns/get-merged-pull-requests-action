@@ -1,0 +1,7 @@
+{
+  "pretty": true,
+  "versioning": {
+    "enabled": true,
+    "branch": "v1"
+  }
+}
