@@ -42,7 +42,7 @@ const getRepo = (): Repo => {
 
 const getCurrentTag = (): string => {
   return (
-    core.getInput('current-tag') ||
+    core.getInput('current_tag') ||
     github.context?.ref?.replace('refs/tags/', '') ||
     'HEAD'
   )
@@ -53,7 +53,7 @@ const getPreviousTag = async (
   repo: Repo,
   currentTag: string
 ): Promise<string | null> => {
-  const previousTag: string = core.getInput('previous-tag')
+  const previousTag: string = core.getInput('previous_tag')
   if (previousTag) {
     return previousTag
   }
@@ -73,7 +73,7 @@ const getPreviousTag = async (
 }
 
 const getReturnType = (): string => {
-  const returnType = core.getInput('return-type')
+  const returnType = core.getInput('return_type')
   if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
     return returnType
   }
@@ -148,7 +148,7 @@ const getPullRequests = async (
 }
 
 const run = async (): Promise<void> => {
-  const githubToken: string = core.getInput('github-token')
+  const githubToken: string = core.getInput('github_token')
 
   if (!githubToken) {
     core.setFailed('Missing required GitHub token')
@@ -196,7 +196,7 @@ const run = async (): Promise<void> => {
     core.info(`${pullRequest.title}`)
   }
 
-  core.setOutput('pull-requests', pullRequests)
+  core.setOutput('pull_requests', pullRequests)
 }
 
 run()

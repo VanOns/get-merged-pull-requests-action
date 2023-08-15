@@ -16,18 +16,18 @@ jobs:
         uses: actions/checkout@v3
       - name: Get merged pull requests
         uses: ./
-        id: pull-requests
+        id: pull_requests
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 #          repo: ${{ github.repository }}
-#          current-tag: ${{ github.ref }}
-#          previous-tag: ${{ github.ref }}
-#          return-type: all
+#          current_tag: ${{ github.ref }}
+#          previous_tag: ${{ github.ref }}
+#          return_type: all
       - name: Print merged pull requests
         run: |
-          if jq -e . >/dev/null 2>&1 <<<"${{ steps.pull-requests.outputs.pull-requests }}"; then
+          if (( ${#"${{ steps.pull_requests.outputs.pull_requests }}"[@]} )); then
             echo "The following pull requests were merged between the current and previous tag:"
-            echo "${{ steps.pull-requests.outputs.pull-requests }}" | jq -r '.[].title' | while read -r title; do
+            echo "${{ steps.pull_requests.outputs.pull_requests }}" | jq -r '.[].title' | while read -r title; do
               echo "- $title"
             done
           else
