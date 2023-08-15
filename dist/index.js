@@ -67,12 +67,12 @@ const getRepo = () => {
 };
 const getCurrentTag = () => {
     var _a, _b;
-    return (core.getInput('current_tag') ||
+    return (core.getInput('current-tag') ||
         ((_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.ref) === null || _b === void 0 ? void 0 : _b.replace('refs/tags/', '')) ||
         'HEAD');
 };
 const getPreviousTag = (client, repo, currentTag) => __awaiter(void 0, void 0, void 0, function* () {
-    const previousTag = core.getInput('previous_tag');
+    const previousTag = core.getInput('previous-tag');
     if (previousTag) {
         return previousTag;
     }
@@ -87,7 +87,7 @@ const getPreviousTag = (client, repo, currentTag) => __awaiter(void 0, void 0, v
     return tags.data[index + 1].name;
 });
 const getReturnType = () => {
-    const returnType = core.getInput('return_type');
+    const returnType = core.getInput('return-type');
     if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
         return returnType;
     }
@@ -119,6 +119,8 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
             yield new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
+    // Sort from newest to oldest
+    items = items.reverse();
     switch (getReturnType()) {
         case 'all':
             return items;
@@ -129,7 +131,7 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
     }
 });
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    const githubToken = core.getInput('github_token');
+    const githubToken = core.getInput('github-token');
     if (!githubToken) {
         core.setFailed('Missing required GitHub token');
         return;
@@ -159,7 +161,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     for (const pullRequest of pullRequests) {
         core.info(`${pullRequest.title}`);
     }
-    core.setOutput('pull_requests', pullRequests);
+    core.setOutput('pull-requests', pullRequests);
 });
 run();
 
