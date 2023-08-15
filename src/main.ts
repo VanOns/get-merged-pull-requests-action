@@ -134,6 +134,9 @@ const getPullRequests = async (
     }
   }
 
+  // Sort from newest to oldest
+  items = items.reverse()
+
   switch (getReturnType()) {
     case 'all':
       return items
