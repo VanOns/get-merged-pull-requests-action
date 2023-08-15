@@ -6,7 +6,7 @@ inputs:
     description: The GitHub token to use.
     required: true
   repo:
-    description: 'The repository to use. Defaults to current repository. Expected format: owner/repo.'
+    description: 'The repository to use. Defaults to current repository. Expected format: `owner/repo`.'
     required: false
   current_tag:
     description: The current tag to use. Defaults to current/latest tag.
@@ -15,7 +15,7 @@ inputs:
     description: The previous tag to use. Defaults to one tag before the current tag.
     required: false
   return_type:
-    description: 'What data to return. Options are: title_only (default), all.'
+    description: 'What data to return. Options are: `title_only`, `all`.'
     required: false
     default: title_only
 outputs:
