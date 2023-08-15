@@ -4,11 +4,11 @@ import * as path from 'path'
 import {test} from '@jest/globals'
 
 test('test runs', () => {
-  // process.env['INPUT_GITHUB_TOKEN'] = ''
+  // process.env['INPUT_GITHUB-TOKEN'] = ''
   // process.env['INPUT_REPO'] = ''
-  // process.env['INPUT_CURRENT_TAG'] = ''
-  // process.env['INPUT_PREVIOUS_TAG'] = ''
-  // process.env['INPUT_RETURN_TYPE'] = ''
+  // process.env['INPUT_CURRENT-TAG'] = ''
+  // process.env['INPUT_PREVIOUS-TAG'] = ''
+  // process.env['INPUT_RETURN-TYPE'] = ''
 
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
