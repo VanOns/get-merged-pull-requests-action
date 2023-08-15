@@ -8,6 +8,7 @@ test('test runs', () => {
   // process.env['INPUT_REPO'] = ''
   // process.env['INPUT_CURRENT_TAG'] = ''
   // process.env['INPUT_PREVIOUS_TAG'] = ''
+  // process.env['INPUT_RETURN_TYPE'] = ''
 
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')

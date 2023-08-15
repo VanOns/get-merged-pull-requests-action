@@ -6,9 +6,16 @@ import {components} from '@octokit/openapi-types'
 // eslint-disable-next-line import/no-unresolved
 import {Api} from '@octokit/plugin-rest-endpoint-methods/dist-types/types'
 
+const ALLOWED_RETURN_TYPES: string[] = ['title_only', 'all']
+const DEFAULT_RETURN_TYPE = 'title_only'
+
 interface Repo {
   owner: string
   repo: string
+}
+
+interface PullRequestDefault {
+  title: string
 }
 
 const getRepo = (): Repo => {
@@ -65,6 +72,15 @@ const getPreviousTag = async (
   return tags.data[index + 1].name
 }
 
+const getReturnType = (): string => {
+  const returnType = core.getInput('return_type')
+  if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
+    return returnType
+  }
+
+  return DEFAULT_RETURN_TYPE
+}
+
 const getCommits = async (
   client: Octokit & Api,
   repo: Repo,
@@ -87,7 +103,11 @@ const getPullRequests = async (
   repo: Repo,
   currentTag: string,
   previousTag: string
-): Promise<components['schemas']['issue-search-result-item'][] | []> => {
+): Promise<
+  | PullRequestDefault[]
+  | components['schemas']['issue-search-result-item'][]
+  | []
+> => {
   const commits = await getCommits(client, repo, currentTag, previousTag)
 
   if (!commits) {
@@ -99,9 +119,6 @@ const getPullRequests = async (
 
   for (let i = 0; i < commits.length; i++) {
     hashes.push(commits[i].sha)
-
-    // eslint-disable-next-line no-console
-    console.log('MAX?', i === commits.length - 1)
 
     if (i % 5 === 0 || i === commits.length - 1) {
       const newItems = (
@@ -117,7 +134,14 @@ const getPullRequests = async (
     }
   }
 
-  return items
+  switch (getReturnType()) {
+    case 'all':
+      return items
+    default:
+      return items.map(item => ({
+        title: item.title
+      }))
+  }
 }
 
 const run = async (): Promise<void> => {
