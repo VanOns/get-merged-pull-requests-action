@@ -28,6 +28,10 @@ const run = (env: Env): void => {
   console.log(cp.execFileSync(process.execPath, [script], options).toString())
 }
 
+test('Retrieves all PRs between the latest tag and now', () => {
+  run(process.env)
+})
+
 test('Retrieves all PRs between v1.0.0 and now', () => {
   const env: Env = {
     ...process.env,
