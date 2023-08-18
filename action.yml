@@ -19,11 +19,11 @@ inputs:
     required: false
     default: title_only
   commit_is_pull_request_regex:
-    description: "The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title."
+    description: "The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Example regex: `^Merge pull request.*`."
     required: true
     default: '/^Merge pull request.*/'
   pull_request_regex:
-    description: "The regex to use if you want to filter the pull requests. This is checked against a pull request's title."
+    description: "The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\\[Feat].*`."
     required: false
 outputs:
   pull_requests:
