@@ -5,18 +5,10 @@ import {Octokit} from '@octokit/core'
 import {components} from '@octokit/openapi-types'
 // eslint-disable-next-line import/no-unresolved
 import {Api} from '@octokit/plugin-rest-endpoint-methods/dist-types/types'
+import {PullRequestDefault, Repo} from './interfaces'
 
 const ALLOWED_RETURN_TYPES: string[] = ['title_only', 'all']
 const DEFAULT_RETURN_TYPE = 'title_only'
-
-interface Repo {
-  owner: string
-  repo: string
-}
-
-interface PullRequestDefault {
-  title: string
-}
 
 const getRepo = (): Repo => {
   const repo = core.getInput('repo')
@@ -93,8 +85,13 @@ const getCommits = async (
     basehead: `${previousTag}...${currentTag}`
   })
 
+  // The regex to use to determine if a commit is a pull request merge commit.
+  const commitIsPullRequestRegex = new RegExp(
+    core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/
+  )
+
   return commits.data.commits.filter(commit =>
-    commit.commit.message.includes('Merge pull request')
+    commitIsPullRequestRegex.test(commit.commit.message)
   )
 }
 
@@ -134,8 +131,14 @@ const getPullRequests = async (
     }
   }
 
-  // Sort from newest to oldest
+  // Sort from newest to oldest.
   items = items.reverse()
+
+  // If a regex is set, only return the PRs that match it.
+  const pullRequestRegex: string = core.getInput('pull_request_regex')
+  if (pullRequestRegex) {
+    items = items.filter(item => new RegExp(pullRequestRegex).test(item.title))
+  }
 
   switch (getReturnType()) {
     case 'all':
