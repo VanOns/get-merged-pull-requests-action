@@ -146,21 +146,26 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     const client = github.getOctokit(githubToken);
     const repo = getRepo();
+    core.debug(`Owner: ${repo.owner}`);
+    core.debug(`Repo: ${repo.repo}`);
     if (!repo.owner || !repo.repo) {
         core.setFailed('Unable to determine owner and/or repo');
         return;
     }
     const currentTag = getCurrentTag();
+    core.debug(`Current tag: ${currentTag}`);
     if (!currentTag) {
         core.setFailed('Unable to determine current tag');
         return;
     }
     const previousTag = yield getPreviousTag(client, repo, currentTag);
+    core.debug(`Previous tag: ${previousTag}`);
     if (!previousTag) {
         core.setFailed('Unable to determine previous tag');
         return;
     }
     const pullRequests = yield getPullRequests(client, repo, currentTag, previousTag);
+    core.debug(`Pull requests found: ${pullRequests.length}`);
     if (!pullRequests.length) {
         core.info('No pull requests found');
         return;
