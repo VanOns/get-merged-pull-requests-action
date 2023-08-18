@@ -164,6 +164,9 @@ const run = async (): Promise<void> => {
 
   const repo = getRepo()
 
+  core.debug(`Owner: ${repo.owner}`)
+  core.debug(`Repo: ${repo.repo}`)
+
   if (!repo.owner || !repo.repo) {
     core.setFailed('Unable to determine owner and/or repo')
     return
@@ -171,12 +174,16 @@ const run = async (): Promise<void> => {
 
   const currentTag = getCurrentTag()
 
+  core.debug(`Current tag: ${currentTag}`)
+
   if (!currentTag) {
     core.setFailed('Unable to determine current tag')
     return
   }
 
   const previousTag = await getPreviousTag(client, repo, currentTag)
+
+  core.debug(`Previous tag: ${previousTag}`)
 
   if (!previousTag) {
     core.setFailed('Unable to determine previous tag')
@@ -189,6 +196,8 @@ const run = async (): Promise<void> => {
     currentTag,
     previousTag
   )
+
+  core.debug(`Pull requests found: ${pullRequests.length}`)
 
   if (!pullRequests.length) {
     core.info('No pull requests found')
