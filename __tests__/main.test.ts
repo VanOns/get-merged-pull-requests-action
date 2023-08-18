@@ -12,10 +12,6 @@ interface Env {
 }
 
 const run = (env: Env): void => {
-  const defaults = {
-    INPUT_PREVIOUS_TAG: 'v1.0.0'
-  }
-
   expect(env['INPUT_GITHUB_TOKEN']).not.toBeUndefined()
 
   if (env['GITHUB_ACTIONS']) {
@@ -24,28 +20,29 @@ const run = (env: Env): void => {
     expect(env['INPUT_REPO']).not.toBeUndefined()
   }
 
-  const np = process.execPath
-  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const script = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
-    env: {
-      ...defaults,
-      ...env
-    }
+    env: env
   }
 
-  console.log(cp.execFileSync(np, [ip], options).toString())
+  console.log(cp.execFileSync(process.execPath, [script], options).toString())
 }
 
-test('runs with default parameters', () => {
-  run(process.env)
-})
-
-test('runs with pr regex', () => {
+test('Retrieves all PRs between v1.0.0 and now', () => {
   const env: Env = {
     ...process.env,
+    INPUT_PREVIOUS_TAG: 'v1.0.0'
+  }
+
+  run(env)
+})
+
+test('Retrieves all PRs between v1.0.0 and now that start with "[Feat]"', () => {
+  const env: Env = {
+    ...process.env,
+    INPUT_PREVIOUS_TAG: 'v1.0.0',
     INPUT_PULL_REQUEST_REGEX: '^\\[Feat].*'
   }
 
-  expect(env['INPUT_PULL_REQUEST_REGEX']).not.toBeUndefined()
   run(env)
 })
