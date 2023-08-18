@@ -12,6 +12,10 @@ interface Env {
 }
 
 const run = (env: Env): void => {
+  const defaults = {
+    INPUT_PREVIOUS_TAG: 'v1.0.0'
+  }
+
   expect(env['INPUT_GITHUB_TOKEN']).not.toBeUndefined()
 
   if (env['GITHUB_ACTIONS']) {
@@ -23,22 +27,23 @@ const run = (env: Env): void => {
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
-    env: env
+    env: {
+      ...defaults,
+      ...env
+    }
   }
 
   console.log(cp.execFileSync(np, [ip], options).toString())
 }
 
 test('runs with default parameters', () => {
-  const env = {...process.env}
-
-  run(env)
+  run(process.env)
 })
 
 test('runs with pr regex', () => {
   const env: Env = {
     ...process.env,
-    INPUT_PULL_REQUEST_REGEX: '/^[TEST].*/'
+    INPUT_PULL_REQUEST_REGEX: '^\\[Feat].*'
   }
 
   expect(env['INPUT_PULL_REQUEST_REGEX']).not.toBeUndefined()
