@@ -34,7 +34,7 @@ jobs:
       - name: Print merged pull requests
         run: |
           pull_requests='${{ steps.pull_requests.outputs.pull_requests }}'
-          escaped_json=$(echo "$json_data" | sed "s/'/\\\\'/g")
+          escaped_json=$(echo "$pull_requests" | sed "s/'/\\\\'/g")
           titles=$(echo "$escaped_json" | jq -r '.[].title')
           if [ -z "$titles" ]; then
             echo "No pull requests were merged between the current and previous tag."
