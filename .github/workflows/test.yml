@@ -1,6 +1,6 @@
 name: Test build
 
-on: # rebuild any PRs and main branch changes
+on:
   workflow_dispatch:
   pull_request:
     types: [opened, reopened, synchronize]
@@ -30,10 +30,7 @@ jobs:
         id: pull_requests
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-#          repo: ${{ github.repository }}
-#          current_tag: ${{ github.ref }}
-#          previous_tag: ${{ github.ref }}
-#          return_type: all
+          previous_tag: 'v1.0.0'
       - name: Print merged pull requests
         run: |
           pull_requests=$(echo ${{ steps.pull_requests.outputs.pull_requests }} | sed "s/\"/\\\\\"/g")
