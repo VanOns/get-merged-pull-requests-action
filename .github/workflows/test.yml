@@ -40,7 +40,7 @@ jobs:
             echo "No pull requests were merged between the current and previous tag."
           else
             echo "The following pull requests were merged between the current and previous tag:"
-            for title in "${titles[@]}"; do
+            echo "$titles" | while read -r title; do
               echo "- $title"
             done
           fi
