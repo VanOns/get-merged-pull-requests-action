@@ -33,12 +33,14 @@ jobs:
           previous_tag: 'v1.0.0'
       - name: Print merged pull requests
         run: |
-          pull_requests=$(echo ${{ steps.pull_requests.outputs.pull_requests }} | sed "s/\"/\\\\\"/g")
-          if [ -z "$pull_requests" ]; then
+          pull_requests='${{ steps.pull_requests.outputs.pull_requests }}'
+          escaped_json=$(echo "$json_data" | sed "s/'/\\\\'/g")
+          titles=$(echo "$escaped_json" | jq -r '.[].title')
+          if [ -z "$titles" ]; then
             echo "No pull requests were merged between the current and previous tag."
           else
             echo "The following pull requests were merged between the current and previous tag:"
-            echo "${pull_requests}" | jq -r '.[].title' | while read -r title; do
+            for title in "${titles[@]}"; do
               echo "- $title"
             done
           fi
