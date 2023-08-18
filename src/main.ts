@@ -137,7 +137,9 @@ const getPullRequests = async (
   // If a regex is set, only return the PRs that match it.
   const pullRequestRegex: string = core.getInput('pull_request_regex')
   if (pullRequestRegex) {
-    items = items.filter(item => new RegExp(pullRequestRegex).test(item.title))
+    const regex = new RegExp(pullRequestRegex)
+
+    items = items.filter(item => regex.test(item.title))
   }
 
   switch (getReturnType()) {
