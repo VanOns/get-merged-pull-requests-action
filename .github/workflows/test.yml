@@ -31,10 +31,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Print merged pull requests
+        env:
+          PULL_REQUESTS: ${{ steps.pull_requests.outputs.pull_requests }}
         run: |
-          pull_requests='${{ steps.pull_requests.outputs.pull_requests }}'
-          escaped_json=$(echo "$pull_requests" | sed "s/'/\\\\'/g")
-          titles=$(echo "$escaped_json" | jq -r '.[].title')
+          titles=$(jq -r '.[].title' <<<"$PULL_REQUESTS")
           if [ -z "$titles" ]; then
             echo "No pull requests were merged between the current and previous tag."
           else
