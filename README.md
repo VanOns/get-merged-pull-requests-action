@@ -1,4 +1,6 @@
 [![Test build](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml/badge.svg)](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml)
+[![MIT License](https://img.shields.io/github/license/VanOns/get-merged-pull-requests-action)](https://github.com/VanOns/get-merged-pull-requests-action/blob/main/LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/VanOns/get-merged-pull-requests-action?sort=semver)](https://github.com/VanOns/get-merged-pull-requests-action/releases/latest)
 
 <!-- start title -->
 
