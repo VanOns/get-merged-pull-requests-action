@@ -99,7 +99,9 @@ const getCommits = (client, repo, currentTag, previousTag) => __awaiter(void 0, 
         repo: repo.repo,
         basehead: `${previousTag}...${currentTag}`
     });
-    return commits.data.commits.filter(commit => commit.commit.message.includes('Merge pull request'));
+    // The regex to use to determine if a commit is a pull request merge commit.
+    const commitIsPullRequestRegex = new RegExp(core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/);
+    return commits.data.commits.filter(commit => commitIsPullRequestRegex.test(commit.commit.message));
 });
 const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(void 0, void 0, void 0, function* () {
     const commits = yield getCommits(client, repo, currentTag, previousTag);
@@ -119,8 +121,14 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
             yield new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
-    // Sort from newest to oldest
+    // Sort from newest to oldest.
     items = items.reverse();
+    // If a regex is set, only return the PRs that match it.
+    const pullRequestRegex = core.getInput('pull_request_regex');
+    if (pullRequestRegex) {
+        const regex = new RegExp(pullRequestRegex);
+        items = items.filter(item => regex.test(item.title));
+    }
     switch (getReturnType()) {
         case 'all':
             return items;
