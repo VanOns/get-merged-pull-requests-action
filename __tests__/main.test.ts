@@ -7,20 +7,45 @@ import * as github from '@actions/github'
 
 dotenv.config({path: '.env.test'})
 
-test('test runs', () => {
-  expect(process.env['INPUT_GITHUB_TOKEN']).not.toBeUndefined()
+interface Env {
+  [key: string]: string | undefined
+}
 
-  if (process.env['GITHUB_ACTIONS']) {
+const run = (env: Env): void => {
+  const defaults = {
+    INPUT_PREVIOUS_TAG: 'v1.0.0'
+  }
+
+  expect(env['INPUT_GITHUB_TOKEN']).not.toBeUndefined()
+
+  if (env['GITHUB_ACTIONS']) {
     expect(github.context.repo).not.toBeUndefined()
   } else {
-    expect(process.env['INPUT_REPO']).not.toBeUndefined()
+    expect(env['INPUT_REPO']).not.toBeUndefined()
   }
 
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
-    env: process.env
+    env: {
+      ...defaults,
+      ...env
+    }
   }
 
   console.log(cp.execFileSync(np, [ip], options).toString())
+}
+
+test('runs with default parameters', () => {
+  run(process.env)
+})
+
+test('runs with pr regex', () => {
+  const env: Env = {
+    ...process.env,
+    INPUT_PULL_REQUEST_REGEX: '^\\[Feat].*'
+  }
+
+  expect(env['INPUT_PULL_REQUEST_REGEX']).not.toBeUndefined()
+  run(env)
 })
