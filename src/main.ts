@@ -94,14 +94,17 @@ const getCommits = async (
       core.getInput('apply_commit_is_pull_request_regex') || 'true'
     ).toLowerCase() === 'true'
 
+  core.debug(`Filter commits: ${filterCommits}`)
+
   if (filterCommits) {
     // The regex to use to determine if a commit is a pull request merge commit.
-    const commitIsPullRequestRegex = new RegExp(
+    const commitIsPullRequestRegex =
       core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/
-    )
+
+    core.debug(`"Commit is pull request" regex: ${commitIsPullRequestRegex}`)
 
     commits = commits.filter(commit =>
-      commitIsPullRequestRegex.test(commit.commit.message)
+      new RegExp(commitIsPullRequestRegex).test(commit.commit.message)
     )
   }
 
