@@ -52,6 +52,10 @@ The pull requests are returned in a certain format, depending on the `return_typ
     # is checked against a commit's title. Default regex: `^Merge pull request.*`.
     commit_is_pull_request_regex: ""
 
+    # Whether to apply `commit_is_pull_request_regex` to the commits.
+    # Default: false
+    apply_commit_is_pull_request_regex: ""
+
     # The regex to use if you want to filter the pull requests. This is checked
     # against a pull request's title. Example regex: `^\[Feat].*`.
     pull_request_regex: ""
@@ -63,15 +67,16 @@ The pull requests are returned in a certain format, depending on the `return_typ
 
 <!-- start inputs -->
 
-| **Input**                          | **Description**                                                                                                                                             | **Default**  | **Required** |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------ |
-| **`github_token`**                 | The GitHub token to use.                                                                                                                                    |              | **true**     |
-| **`repo`**                         | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
-| **`current_tag`**                  | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
-| **`previous_tag`**                 | The previous tag to use. Defaults to one tag before the current tag.                                                                                        |              | **false**    |
-| **`return_type`**                  | What data to return. Options are: `title_only`, `all`.                                                                                                      | `title_only` | **false**    |
-| **`commit_is_pull_request_regex`** | The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`. |              | **false**    |
-| **`pull_request_regex`**           | The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\[Feat].*`.                      |              | **false**    |
+| **Input**                                | **Description**                                                                                                                                             | **Default**  | **Required** |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------ |
+| **`github_token`**                       | The GitHub token to use.                                                                                                                                    |              | **true**     |
+| **`repo`**                               | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
+| **`current_tag`**                        | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
+| **`previous_tag`**                       | The previous tag to use. Defaults to one tag before the current tag.                                                                                        |              | **false**    |
+| **`return_type`**                        | What data to return. Options are: `title_only`, `all`.                                                                                                      | `title_only` | **false**    |
+| **`commit_is_pull_request_regex`**       | The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`. |              | **false**    |
+| **`apply_commit_is_pull_request_regex`** | Whether to apply `commit_is_pull_request_regex` to the commits.                                                                                             |              | **false**    |
+| **`pull_request_regex`**                 | The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\[Feat].*`.                      |              | **false**    |
 
 <!-- end inputs -->
 
