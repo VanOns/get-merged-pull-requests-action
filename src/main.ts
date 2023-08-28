@@ -50,18 +50,20 @@ const getPreviousTag = async (
     return previousTag
   }
 
-  const tags = await client.rest.repos.listTags({
-    owner: repo.owner,
-    repo: repo.repo
-  })
+  const tags = (
+    await client.rest.repos.listTags({
+      owner: repo.owner,
+      repo: repo.repo
+    })
+  ).data
 
-  const index: number = tags.data.findIndex(tag => tag.name === currentTag)
+  const index: number = tags.findIndex(tag => tag.name === currentTag)
 
-  if (typeof tags.data[index + 1] === 'undefined') {
+  if (typeof tags[index + 1] === 'undefined') {
     return null
   }
 
-  return tags.data[index + 1].name
+  return tags[index + 1].name
 }
 
 const getReturnType = (): string => {
@@ -79,20 +81,31 @@ const getCommits = async (
   currentTag: string,
   previousTag: string
 ): Promise<components['schemas']['commit'][] | null> => {
-  const commits = await client.rest.repos.compareCommitsWithBasehead({
+  const response = await client.rest.repos.compareCommitsWithBasehead({
     owner: repo.owner,
     repo: repo.repo,
     basehead: `${previousTag}...${currentTag}`
   })
 
-  // The regex to use to determine if a commit is a pull request merge commit.
-  const commitIsPullRequestRegex = new RegExp(
-    core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/
-  )
+  let commits = response.data.commits
 
-  return commits.data.commits.filter(commit =>
-    commitIsPullRequestRegex.test(commit.commit.message)
-  )
+  const filterCommits =
+    (
+      core.getInput('apply_commit_is_pull_request_regex') || 'true'
+    ).toLowerCase() === 'true'
+
+  if (filterCommits) {
+    // The regex to use to determine if a commit is a pull request merge commit.
+    const commitIsPullRequestRegex = new RegExp(
+      core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/
+    )
+
+    commits = commits.filter(commit =>
+      commitIsPullRequestRegex.test(commit.commit.message)
+    )
+  }
+
+  return commits
 }
 
 const getPullRequests = async (
