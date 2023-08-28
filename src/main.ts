@@ -140,7 +140,8 @@ const getPullRequests = async (
       items = items.concat(newItems)
       hashes = []
 
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // GitHub has a rate limit of 30 requests per minute.
+      await new Promise(resolve => setTimeout(resolve, 2000))
     }
   }
 
