@@ -91,7 +91,7 @@ const getCommits = async (
 
   const filterCommits =
     (
-      core.getInput('apply_commit_is_pull_request_regex') || 'true'
+      core.getInput('apply_commit_is_pull_request_regex') || 'false'
     ).toLowerCase() === 'true'
 
   core.debug(`Filter commits: ${filterCommits}`)
