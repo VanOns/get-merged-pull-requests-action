@@ -34,8 +34,8 @@ test('Retrieves all PRs between the latest tag and now', () => {
 
 test('Retrieves all PRs between v1.0.0 and now', () => {
   const env: Env = {
-    ...process.env,
-    INPUT_PREVIOUS_TAG: 'v1.0.0'
+    INPUT_PREVIOUS_TAG: 'v1.0.0',
+    ...process.env
   }
 
   run(env)
@@ -43,9 +43,9 @@ test('Retrieves all PRs between v1.0.0 and now', () => {
 
 test('Retrieves all PRs between v1.0.0 and now that start with "[Feat]"', () => {
   const env: Env = {
-    ...process.env,
     INPUT_PREVIOUS_TAG: 'v1.0.0',
-    INPUT_PULL_REQUEST_REGEX: '^\\[Feat].*'
+    INPUT_PULL_REQUEST_REGEX: '^\\[Feat].*',
+    ...process.env
   }
 
   run(env)
