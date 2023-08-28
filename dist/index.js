@@ -76,15 +76,15 @@ const getPreviousTag = (client, repo, currentTag) => __awaiter(void 0, void 0, v
     if (previousTag) {
         return previousTag;
     }
-    const tags = yield client.rest.repos.listTags({
+    const tags = (yield client.rest.repos.listTags({
         owner: repo.owner,
         repo: repo.repo
-    });
-    const index = tags.data.findIndex(tag => tag.name === currentTag);
-    if (typeof tags.data[index + 1] === 'undefined') {
+    })).data;
+    const index = tags.findIndex(tag => tag.name === currentTag);
+    if (typeof tags[index + 1] === 'undefined') {
         return null;
     }
-    return tags.data[index + 1].name;
+    return tags[index + 1].name;
 });
 const getReturnType = () => {
     const returnType = core.getInput('return_type');
@@ -94,14 +94,21 @@ const getReturnType = () => {
     return DEFAULT_RETURN_TYPE;
 };
 const getCommits = (client, repo, currentTag, previousTag) => __awaiter(void 0, void 0, void 0, function* () {
-    const commits = yield client.rest.repos.compareCommitsWithBasehead({
+    const response = yield client.rest.repos.compareCommitsWithBasehead({
         owner: repo.owner,
         repo: repo.repo,
         basehead: `${previousTag}...${currentTag}`
     });
-    // The regex to use to determine if a commit is a pull request merge commit.
-    const commitIsPullRequestRegex = new RegExp(core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/);
-    return commits.data.commits.filter(commit => commitIsPullRequestRegex.test(commit.commit.message));
+    let commits = response.data.commits;
+    const filterCommits = (core.getInput('apply_commit_is_pull_request_regex') || 'false').toLowerCase() === 'true';
+    core.debug(`Filter commits: ${filterCommits}`);
+    if (filterCommits) {
+        // The regex to use to determine if a commit is a pull request merge commit.
+        const commitIsPullRequestRegex = core.getInput('commit_is_pull_request_regex') || /^Merge pull request.*/;
+        core.debug(`"Commit is pull request" regex: ${commitIsPullRequestRegex}`);
+        commits = commits.filter(commit => new RegExp(commitIsPullRequestRegex).test(commit.commit.message));
+    }
+    return commits;
 });
 const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(void 0, void 0, void 0, function* () {
     const commits = yield getCommits(client, repo, currentTag, previousTag);
@@ -118,7 +125,8 @@ const getPullRequests = (client, repo, currentTag, previousTag) => __awaiter(voi
             })).data.items;
             items = items.concat(newItems);
             hashes = [];
-            yield new Promise(resolve => setTimeout(resolve, 1000));
+            // GitHub has a rate limit of 30 requests per minute.
+            yield new Promise(resolve => setTimeout(resolve, 2000));
         }
     }
     // Sort from newest to oldest.
