@@ -82,4 +82,4 @@ The pull requests are returned in a certain format, depending on the `return_typ
 
 # License
 
-The scripts and documentation in this project are released under the [MIT License](LICENSE).
+The scripts and documentation in this project are released under the [GPL-3.0 License](LICENSE).
