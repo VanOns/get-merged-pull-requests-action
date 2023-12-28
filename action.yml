@@ -1,5 +1,5 @@
 name: 'Get merged pull requests'
-description: 'Compare 2 tags and retrieve all the pull requests merged between them.'
+description: 'Compare two tags and retrieve all the pull requests merged between them.'
 author: 'Van Ons'
 branding:
   icon: 'git-pull-request'
@@ -20,7 +20,7 @@ inputs:
   return_type:
     description: 'What data to return. Options are: `title_only`, `all`.'
     required: false
-    default: title_only
+    default: 'title_only'
   commit_is_pull_request_regex:
     description: "The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`."
     required: false
@@ -33,7 +33,7 @@ inputs:
     required: false
 outputs:
   pull_requests:
-    description: 'The pull requests merged between the 2 tags.'
+    description: 'The pull requests merged between the two tags.'
 runs:
-  using: node16
+  using: node20
   main: dist/index.js

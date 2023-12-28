@@ -12,7 +12,7 @@
 
 <!-- start description -->
 
-Compare 2 tags and retrieve all the pull requests merged between them.
+Compare two tags and retrieve all the pull requests merged between them.
 
 <!-- end description -->
 
