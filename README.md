@@ -1,6 +1,4 @@
-[![Test build](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml/badge.svg)](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml)
-[![GPL-3.0 License](https://img.shields.io/github/license/VanOns/get-merged-pull-requests-action)](https://github.com/VanOns/get-merged-pull-requests-action/blob/main/LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/VanOns/get-merged-pull-requests-action?sort=semver)](https://github.com/VanOns/get-merged-pull-requests-action/releases/latest)
+<p align="center"><img src="art/social-card.png" alt="Social card of GitHub Action: Get merged pull requests"></p>
 
 <!-- start title -->
 
@@ -8,23 +6,19 @@
 
 <!-- end title -->
 
+[![Test build](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml/badge.svg)](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml)
+[![GPL-3.0 License](https://img.shields.io/github/license/VanOns/get-merged-pull-requests-action)](https://github.com/VanOns/get-merged-pull-requests-action/blob/main/LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/VanOns/get-merged-pull-requests-action?sort=semver)](https://github.com/VanOns/get-merged-pull-requests-action/releases/latest)
+
 <!-- start description -->
 
 Compare 2 tags and retrieve all the pull requests merged between them.
 
 <!-- end description -->
 
-# Return format
+## Quick start
 
-The pull requests are returned in a certain format, depending on the `return_type` value:
-
-- **`title_only` (default)**
-  ```json
-  [{ "title": "Title of the pull request" }]
-  ```
-- **`all`**: see [here](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests) for a full overview.
-
-# Usage
+### Usage
 
 <!-- start usage -->
 
@@ -63,12 +57,22 @@ The pull requests are returned in a certain format, depending on the `return_typ
 
 <!-- end usage -->
 
-# Inputs
+### Return format
+
+The pull requests are returned in a certain format, depending on the `return_type` value:
+
+- **`title_only` (default)**
+  ```json
+  [{ "title": "Title of the pull request" }]
+  ```
+- **`all`**: see [here][return-format-overview] for a full overview.
+
+### Inputs
 
 <!-- start inputs -->
 
 | **Input**                                | **Description**                                                                                                                                             | **Default**  | **Required** |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------ |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|--------------|
 | **`github_token`**                       | The GitHub token to use.                                                                                                                                    |              | **true**     |
 | **`repo`**                               | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
 | **`current_tag`**                        | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
@@ -80,6 +84,46 @@ The pull requests are returned in a certain format, depending on the `return_typ
 
 <!-- end inputs -->
 
-# License
+## Documentation
 
-The scripts and documentation in this project are released under the [GPL-3.0 License](LICENSE).
+Please see the [documentation] for detailed information about installation and usage.
+
+## Contributing
+
+Please see [contributing] for more information about how you can contribute.
+
+## Changelog
+
+Please see [changelog] for more information about what has changed recently.
+
+## Upgrading
+
+Please see [upgrading] for more information about how to upgrade.
+
+## Security
+
+Please see [security] for more information about how we deal with security.
+
+## Credits
+
+We would like to thank the following contributors for their contributions to this project:
+
+* [All Contributors][all-contributors]
+
+## License
+
+The scripts and documentation in this project are released under the [MIT License][license].
+
+---
+
+<p align="center"><a href="https://van-ons.nl/" target="_blank"><img src="https://opensource.van-ons.nl/files/cow.png" width="50" alt="Logo of Van Ons"></a></p>
+
+[return-format-overview]: https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests
+[documentation]: docs
+[contributing]: CONTRIBUTING.md
+[changelog]: CHANGELOG.md
+[upgrading]: UPGRADING.md
+[security]: SECURITY.md
+[email]: mailto:opensource@van-ons.nl
+[all-contributors]: ../../contributors
+[license]: LICENSE.md
