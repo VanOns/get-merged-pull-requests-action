@@ -72,7 +72,7 @@ The pull requests are returned in a certain format, depending on the `return_typ
 <!-- start inputs -->
 
 | **Input**                                | **Description**                                                                                                                                             | **Default**  | **Required** |
-|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|--------------|
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------ |
 | **`github_token`**                       | The GitHub token to use.                                                                                                                                    |              | **true**     |
 | **`repo`**                               | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
 | **`current_tag`**                        | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
@@ -108,7 +108,7 @@ Please see [security] for more information about how we deal with security.
 
 We would like to thank the following contributors for their contributions to this project:
 
-* [All Contributors][all-contributors]
+- [All Contributors][all-contributors]
 
 ## License
 
