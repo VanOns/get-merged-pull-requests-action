@@ -2,6 +2,19 @@
 
 All changes to this project will be documented in this file.
 
+## v1.1.3 - 2024-02-20
+
+### What's changed
+
+### 🛠 Changes
+
+- Bump @typescript-eslint/parser from 6.7.0 to 6.21.0 #81 (by @dependabot)
+- Bump prettier from 3.0.3 to 3.2.5 #79 (by @dependabot)
+- Bump @types/node from 20.6.0 to 20.11.19 #84 (by @dependabot)
+- Bump @octokit/openapi-types from 18.0.0 to 19.1.0 #56 (by @dependabot)
+- Bump release-drafter/release-drafter from 5 to 6 #78 (by @dependabot)
+- Bump jest from 29.6.4 to 29.7.0 #49 (by @dependabot)
+
 ## v1.1.2 - 2023-12-28
 
 ### What's changed
