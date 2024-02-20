@@ -15,21 +15,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install dependencies
         run: npm install
+
       - name: Run all scripts
         run: |
           INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npm run all
+
   get-prs: # make sure we can actually execute the action
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Get merged pull requests
         uses: ./
         id: pull_requests
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Print merged pull requests
         env:
           PULL_REQUESTS: ${{ steps.pull_requests.outputs.pull_requests }}
