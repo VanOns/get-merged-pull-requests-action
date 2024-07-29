@@ -27,10 +27,14 @@ inputs:
   apply_commit_is_pull_request_regex:
     description: 'Whether to apply `commit_is_pull_request_regex` to the commits.'
     required: false
-    default: false
+    default: 'false'
   pull_request_regex:
     description: "The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\\[Feat].*`."
     required: false
+  commit_limit:
+    description: 'Limit the number of commits to retrieve.'
+    required: false
+    default: '250'
 outputs:
   pull_requests:
     description: 'The pull requests merged between the two tags.'

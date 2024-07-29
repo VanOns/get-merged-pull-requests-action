@@ -54,6 +54,7 @@ The following inputs can be used to configure the action:
 | **`commit_is_pull_request_regex`**       | The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`. |              | **false**    |
 | **`apply_commit_is_pull_request_regex`** | Whether to apply `commit_is_pull_request_regex` to the commits.                                                                                             |              | **false**    |
 | **`pull_request_regex`**                 | The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\[Feat].*`.                      |              | **false**    |
+| **`commit_limit`**                       | Limit the number of commits to retrieve.                                                                                                                    | `250`        | **false**    |
 
 ## Using the output
 

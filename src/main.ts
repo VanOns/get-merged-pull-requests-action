@@ -75,16 +75,30 @@ const getReturnType = (): string => {
   return DEFAULT_RETURN_TYPE
 }
 
+const getCommitLimit = (): number | undefined => {
+  const commitLimit = parseInt(core.getInput('commit_limit'))
+  if (Number.isNaN(commitLimit)) {
+    return undefined
+  }
+
+  return commitLimit
+}
+
 const getCommits = async (
   client: Octokit & Api,
   repo: Repo,
   currentTag: string,
   previousTag: string
 ): Promise<components['schemas']['commit'][] | null> => {
+  const commitLimit = getCommitLimit()
+
+  core.debug(`Commit limit: ${commitLimit}`)
+
   const response = await client.rest.repos.compareCommitsWithBasehead({
     owner: repo.owner,
     repo: repo.repo,
-    basehead: `${previousTag}...${currentTag}`
+    basehead: `${previousTag}...${currentTag}`,
+    per_page: commitLimit
   })
 
   let commits = response.data.commits
