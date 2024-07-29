@@ -1,4 +1,4 @@
-name: 'Get merged pull requests'
+name: 'Get Merged Pull Requests'
 description: 'Compare two tags and retrieve all the pull requests merged between them.'
 author: 'Van Ons'
 branding:
