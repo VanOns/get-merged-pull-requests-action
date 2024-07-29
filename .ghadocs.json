@@ -1,5 +1,5 @@
 {
-  "pretty": true,
+  "prettier": true,
   "versioning": {
     "enabled": true,
     "branch": "v1"
