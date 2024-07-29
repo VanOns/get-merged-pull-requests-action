@@ -2,6 +2,22 @@
 
 All changes to this project will be documented in this file.
 
+## v1.2.0 - 2024-07-29
+
+### What's Changed
+
+* Add support for commit limit
+* Bump eslint from 8.54.0 to 8.57.0 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/87
+* Bump ts-jest from 29.1.1 to 29.1.2 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/85
+* Bump ts-node from 10.9.1 to 10.9.2 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/86
+* Bump dotenv from 16.3.1 to 16.4.5 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/89
+* Bump @types/node from 20.11.19 to 20.11.28 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/90
+* Bump @typescript-eslint/eslint-plugin from 6.12.0 to 7.0.0 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/94
+* Bump eslint-plugin-github from 4.10.1 to 5.0.1 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/99
+* Bump eslint-plugin-jest from 27.9.0 to 28.6.0 by @dependabot in https://github.com/VanOns/get-merged-pull-requests-action/pull/100
+
+**Full Changelog**: https://github.com/VanOns/get-merged-pull-requests-action/compare/v1...v1.2.0
+
 ## v1.1.3 - 2024-02-20
 
 ### What's changed
