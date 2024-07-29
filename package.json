@@ -1,6 +1,6 @@
 {
   "name": "get-merged-pull-requests-action",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "GitHub action that compares two tags and retrieves all pull requests merged between them.",
   "main": "lib/main.js",
   "scripts": {
@@ -13,9 +13,9 @@
     "test": "jest",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
     "readme": "github-action-readme-generator --readme README.md",
-    "bump-patch": "npm version patch --no-git-tag-version && npm run readme && npm run all",
-    "bump-minor": "npm version minor --no-git-tag-version && npm run readme && npm run all",
-    "bump-major": "npm version major --no-git-tag-version && npm run readme && npm run all",
+    "bump-patch": "npm version patch --no-git-tag-version && npm run all",
+    "bump-minor": "npm version minor --no-git-tag-version && npm run all",
+    "bump-major": "npm version major --no-git-tag-version && npm run all",
     "update-v1": "git tag -sfa v1 -m \"Update v1 tag\" && git push origin v1 --force"
   },
   "repository": {
