@@ -2,7 +2,7 @@
 
 <!-- start title -->
 
-# GitHub Action: Get merged pull requests
+# GitHub Action: Get Merged Pull Requests
 
 <!-- end title -->
 
