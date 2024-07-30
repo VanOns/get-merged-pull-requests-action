@@ -34,7 +34,7 @@
     "@actions/github": "^6.0.0"
   },
   "devDependencies": {
-    "@octokit/openapi-types": "^19.1.0",
+    "@octokit/openapi-types": "^22.2.0",
     "@types/node": "^20.11.28",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.0.0",
