@@ -12,7 +12,6 @@ on:
 jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
-    environment: tests
     steps:
       - name: Checkout
         uses: actions/checkout@v4
