@@ -1,9 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {Octokit} from '@octokit/core'
-// eslint-disable-next-line import/no-unresolved
 import {components} from '@octokit/openapi-types'
-// eslint-disable-next-line import/no-unresolved
 import {Api} from '@octokit/plugin-rest-endpoint-methods/dist-types/types'
 import {PullRequestDefault, Repo} from './interfaces'
 import path from 'path'
