@@ -49,6 +49,9 @@ Compare two tags and retrieve all the pull requests merged between them.
     # The regex to use if you want to filter the pull requests. This is checked
     # against a pull request's title. Example regex: `^\[Feat].*`.
     pull_request_regex: ""
+
+    # Limit the number of commits to retrieve.
+    commit_limit: ""
 ```
 
 <!-- end usage -->

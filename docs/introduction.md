@@ -16,6 +16,7 @@ A fully filled-in example action would look like this:
     commit_is_pull_request_regex: "^PR:.*"
     apply_commit_is_pull_request_regex: true
     pull_request_regex: "^\[ABC-.*].*"
+    commit_limit: 5
 ```
 
 However, you do not necessarily need to use all the inputs. If you only want the titles, you would use the following:
