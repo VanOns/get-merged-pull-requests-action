@@ -24,7 +24,7 @@ run: |
 +  fi
 
 -  titles=$(jq -r '.[].title' <<<"$PULL_REQUESTS")
-+  titles=$(jq -r '.[].title' "$PR_FILE")
++  titles=$(jq -r '.[].title' "$PULL_REQUESTS_FILE")
 
   if [ -z "$titles" ]; then
     echo "No pull requests were merged between the current and previous tag."
