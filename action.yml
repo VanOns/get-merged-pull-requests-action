@@ -32,8 +32,8 @@ inputs:
     required: false
     default: '250'
 outputs:
-  pull_requests:
-    description: 'The pull requests merged between the two tags.'
+  pull_requests_file:
+    description: 'The path to the JSON file containing the pull requests merged between the two tags.'
 runs:
   using: node20
   main: dist/index.js

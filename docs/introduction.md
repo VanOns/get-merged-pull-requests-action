@@ -56,18 +56,19 @@ The following inputs can be used to configure the action:
 
 ## Using the output
 
-The next step would be to do something with the output. The output is stored under `steps.<action_id>.outputs.pull_requests`
-(which in the example above would be `steps.pull_requests.outputs.pull_requests`). This output is a JSON string, which can be
-parsed using something like `jq`.
+The next step would be to do something with the output. The output is stored in a JSON file, the path to which is returned
+under `steps.<action_id>.outputs.pull_requests_file` (which in the example above would be
+`steps.pull_requests.outputs.pull_requests_file`). This output can be parsed using something like `jq`.
 
 An example of using the output with `jq` would be:
 
 ```yaml
 - name: Print merged pull requests
   env:
-    PULL_REQUESTS: ${{ steps.pull_requests.outputs.pull_requests }}
+    PULL_REQUESTS_FILE: ${{ steps.pull_requests.outputs.pull_requests_file }}
   run: |
-    titles=$(jq -r '.[].title' <<<"$PULL_REQUESTS")
+    titles=$(jq -r '.[].title' "$PULL_REQUESTS_FILE")
+
     if [ -z "$titles" ]; then
       echo "No pull requests were merged between the current and previous tag."
     else
