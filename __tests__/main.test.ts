@@ -22,7 +22,10 @@ const run = (env: Env): void => {
 
   const script = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
-    env: env,
+    env: {
+      ...env,
+      INPUT_COMMIT_LIMIT: '1',
+    },
     encoding: 'utf-8'
   }
 
