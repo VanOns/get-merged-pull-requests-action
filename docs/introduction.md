@@ -67,6 +67,11 @@ An example of using the output with `jq` would be:
   env:
     PULL_REQUESTS_FILE: ${{ steps.pull_requests.outputs.pull_requests_file }}
   run: |
+    if [ -z "$PULL_REQUESTS_FILE" ] || [ ! -f "$PULL_REQUESTS_FILE" ]; then
+      echo "No pull requests were merged between the current and previous tag."
+      exit 0
+    fi
+    
     titles=$(jq -r '.[].title' "$PULL_REQUESTS_FILE")
 
     if [ -z "$titles" ]; then
