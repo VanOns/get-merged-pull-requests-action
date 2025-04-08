@@ -24,7 +24,7 @@ const run = (env: Env): void => {
   const options: cp.ExecFileSyncOptions = {
     env: {
       ...env,
-      INPUT_COMMIT_LIMIT: '1',
+      INPUT_COMMIT_LIMIT: '5',
     },
     encoding: 'utf-8'
   }
