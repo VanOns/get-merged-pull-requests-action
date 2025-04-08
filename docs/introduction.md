@@ -13,7 +13,6 @@ A fully filled-in example action would look like this:
     repo: "VanOns/cool-repo"
     current_tag: "v2.0.0"
     previous_tag: "v1.0.0"
-    return_type: "all"
     commit_is_pull_request_regex: "^PR:.*"
     apply_commit_is_pull_request_regex: true
     pull_request_regex: "^\[ABC-.*].*"
@@ -50,7 +49,6 @@ The following inputs can be used to configure the action:
 | **`repo`**                               | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
 | **`current_tag`**                        | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
 | **`previous_tag`**                       | The previous tag to use. Defaults to one tag before the current tag.                                                                                        |              | **false**    |
-| **`return_type`**                        | What data to return. Options are: `title_only`, `all`.                                                                                                      | `title_only` | **false**    |
 | **`commit_is_pull_request_regex`**       | The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`. |              | **false**    |
 | **`apply_commit_is_pull_request_regex`** | Whether to apply `commit_is_pull_request_regex` to the commits.                                                                                             |              | **false**    |
 | **`pull_request_regex`**                 | The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\[Feat].*`.                      |              | **false**    |
@@ -58,18 +56,24 @@ The following inputs can be used to configure the action:
 
 ## Using the output
 
-The next step would be to do something with the output. The output is stored under `steps.<action_id>.outputs.pull_requests`
-(which in the example above would be `steps.pull_requests.outputs.pull_requests`). This output is a JSON string, which can be
-parsed using something like `jq`.
+The next step would be to do something with the output. The output is stored in a JSON file, the path to which is returned
+under `steps.<action_id>.outputs.pull_requests_file` (which in the example above would be
+`steps.pull_requests.outputs.pull_requests_file`). This output can be parsed using something like `jq`.
 
 An example of using the output with `jq` would be:
 
 ```yaml
 - name: Print merged pull requests
   env:
-    PULL_REQUESTS: ${{ steps.pull_requests.outputs.pull_requests }}
+    PULL_REQUESTS_FILE: ${{ steps.pull_requests.outputs.pull_requests_file }}
   run: |
-    titles=$(jq -r '.[].title' <<<"$PULL_REQUESTS")
+    if [ -z "$PULL_REQUESTS_FILE" ] || [ ! -f "$PULL_REQUESTS_FILE" ]; then
+      echo "No pull requests were merged between the current and previous tag."
+      exit 0
+    fi
+    
+    titles=$(jq -r '.[].title' "$PULL_REQUESTS_FILE")
+
     if [ -z "$titles" ]; then
       echo "No pull requests were merged between the current and previous tag."
     else

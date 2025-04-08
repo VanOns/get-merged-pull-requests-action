@@ -17,10 +17,6 @@ inputs:
   previous_tag:
     description: 'The previous tag to use. Defaults to one tag before the current tag.'
     required: false
-  return_type:
-    description: 'What data to return. Options are: `title_only`, `all`.'
-    required: false
-    default: 'title_only'
   commit_is_pull_request_regex:
     description: "The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`."
     required: false
@@ -36,8 +32,8 @@ inputs:
     required: false
     default: '250'
 outputs:
-  pull_requests:
-    description: 'The pull requests merged between the two tags.'
+  pull_requests_file:
+    description: 'The path to the JSON file containing the pull requests merged between the two tags.'
 runs:
   using: node20
   main: dist/index.js

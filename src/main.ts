@@ -4,9 +4,8 @@ import {Octokit} from '@octokit/core'
 import {components} from '@octokit/openapi-types'
 import {Api} from '@octokit/plugin-rest-endpoint-methods/dist-types/types'
 import {PullRequestDefault, Repo} from './interfaces'
-
-const ALLOWED_RETURN_TYPES: string[] = ['title_only', 'all']
-const DEFAULT_RETURN_TYPE = 'title_only'
+import path from 'path'
+import fs from 'fs'
 
 const getRepo = (): Repo => {
   const repo = core.getInput('repo')
@@ -62,15 +61,6 @@ const getPreviousTag = async (
   }
 
   return tags[index + 1].name
-}
-
-const getReturnType = (): string => {
-  const returnType = core.getInput('return_type')
-  if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
-    return returnType
-  }
-
-  return DEFAULT_RETURN_TYPE
 }
 
 const getCommitLimit = (): number | undefined => {
@@ -171,14 +161,7 @@ const getPullRequests = async (
     items = items.filter(item => regex.test(item.title))
   }
 
-  switch (getReturnType()) {
-    case 'all':
-      return items
-    default:
-      return items.map(item => ({
-        title: item.title
-      }))
-  }
+  return items
 }
 
 const run = async (): Promise<void> => {
@@ -239,7 +222,17 @@ const run = async (): Promise<void> => {
     core.info(`${pullRequest.title}`)
   }
 
-  core.setOutput('pull_requests', pullRequests)
+  const outputDir = path.join(process.cwd(), 'output')
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir)
+  }
+
+  const outputFile = path.join(outputDir, 'pull-requests.json')
+  fs.writeFileSync(outputFile, JSON.stringify(pullRequests, null, 2))
+
+  core.debug(`Pull requests written to ${outputFile}`)
+
+  core.setOutput('pull_requests_file', outputFile)
 }
 
 run()
