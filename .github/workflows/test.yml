@@ -36,6 +36,7 @@ jobs:
         id: pull_requests
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          previous_tag: v1.0.0
           commit_limit: 1
 
       - name: Print merged pull requests
