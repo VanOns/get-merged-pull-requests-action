@@ -7,9 +7,6 @@ import {components} from '@octokit/openapi-types'
 import {Api} from '@octokit/plugin-rest-endpoint-methods/dist-types/types'
 import {PullRequestDefault, Repo} from './interfaces'
 
-const ALLOWED_RETURN_TYPES: string[] = ['title_only', 'all']
-const DEFAULT_RETURN_TYPE = 'title_only'
-
 const getRepo = (): Repo => {
   const repo = core.getInput('repo')
   if (repo && repo.includes('/')) {
@@ -64,15 +61,6 @@ const getPreviousTag = async (
   }
 
   return tags[index + 1].name
-}
-
-const getReturnType = (): string => {
-  const returnType = core.getInput('return_type')
-  if (returnType && ALLOWED_RETURN_TYPES.includes(returnType)) {
-    return returnType
-  }
-
-  return DEFAULT_RETURN_TYPE
 }
 
 const getCommitLimit = (): number | undefined => {
@@ -173,14 +161,7 @@ const getPullRequests = async (
     items = items.filter(item => regex.test(item.title))
   }
 
-  switch (getReturnType()) {
-    case 'all':
-      return items
-    default:
-      return items.map(item => ({
-        title: item.title
-      }))
-  }
+  return items
 }
 
 const run = async (): Promise<void> => {

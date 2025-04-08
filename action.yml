@@ -17,10 +17,6 @@ inputs:
   previous_tag:
     description: 'The previous tag to use. Defaults to one tag before the current tag.'
     required: false
-  return_type:
-    description: 'What data to return. Options are: `title_only`, `all`.'
-    required: false
-    default: 'title_only'
   commit_is_pull_request_regex:
     description: "The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`."
     required: false

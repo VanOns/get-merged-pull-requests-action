@@ -38,10 +38,6 @@ Compare two tags and retrieve all the pull requests merged between them.
     # The previous tag to use. Defaults to one tag before the current tag.
     previous_tag: ""
 
-    # What data to return. Options are: `title_only`, `all`.
-    # Default: title_only
-    return_type: ""
-
     # The regex to use to determine if a commit is a pull request merge commit. This
     # is checked against a commit's title. Default regex: `^Merge pull request.*`.
     commit_is_pull_request_regex: ""
@@ -57,16 +53,6 @@ Compare two tags and retrieve all the pull requests merged between them.
 
 <!-- end usage -->
 
-### Return format
-
-The pull requests are returned in a certain format, depending on the `return_type` value:
-
-- **`title_only` (default)**
-  ```json
-  [{ "title": "Title of the pull request" }]
-  ```
-- **`all`**: see [here][return-format-overview] for a full overview.
-
 ### Inputs
 
 <!-- start inputs -->
@@ -77,7 +63,6 @@ The pull requests are returned in a certain format, depending on the `return_typ
 | **`repo`**                               | The repository to use. Defaults to current repository. Expected format: `owner/repo`.                                                                       |              | **false**    |
 | **`current_tag`**                        | The current tag to use. Defaults to current/latest tag.                                                                                                     |              | **false**    |
 | **`previous_tag`**                       | The previous tag to use. Defaults to one tag before the current tag.                                                                                        |              | **false**    |
-| **`return_type`**                        | What data to return. Options are: `title_only`, `all`.                                                                                                      | `title_only` | **false**    |
 | **`commit_is_pull_request_regex`**       | The regex to use to determine if a commit is a pull request merge commit. This is checked against a commit's title. Default regex: `^Merge pull request.*`. |              | **false**    |
 | **`apply_commit_is_pull_request_regex`** | Whether to apply `commit_is_pull_request_regex` to the commits.                                                                                             |              | **false**    |
 | **`pull_request_regex`**                 | The regex to use if you want to filter the pull requests. This is checked against a pull request's title. Example regex: `^\[Feat].*`.                      |              | **false**    |
@@ -119,7 +104,6 @@ The scripts and documentation in this project are released under the [MIT Licens
 
 <p align="center"><a href="https://van-ons.nl/" target="_blank"><img src="https://opensource.van-ons.nl/files/cow.png" width="50" alt="Logo of Van Ons"></a></p>
 
-[return-format-overview]: https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-issues-and-pull-requests
 [documentation]: docs
 [contributing]: CONTRIBUTING.md
 [changelog]: CHANGELOG.md
