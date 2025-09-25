@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, reopened, synchronize]
-#  push:
-#    branches:
-#      - main
-#      - 'releases/*'
 
 jobs:
   build: # make sure build/ci work properly
@@ -16,8 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install dependencies
-        run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install npm dependencies
+        run: npm ci
 
       - name: Run all scripts
         run: |
