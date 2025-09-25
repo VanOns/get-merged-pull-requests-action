@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.36.0",
-    "@octokit/openapi-types": "^24.0.0",
+    "@octokit/openapi-types": "^26.0.0",
     "@stylistic/eslint-plugin": "^4.4.0",
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
