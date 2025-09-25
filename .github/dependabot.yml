@@ -7,8 +7,6 @@ updates:
       interval: weekly
     labels:
       - dependencies
-    assignees:
-      - 'VanOns/open-source'
 
   - package-ecosystem: npm
     directory: /
@@ -16,5 +14,3 @@ updates:
       interval: weekly
     labels:
       - dependencies
-    assignees:
-      - 'VanOns/open-source'
