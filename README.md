@@ -6,9 +6,11 @@
 
 <!-- end title -->
 
-[![Test build](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml/badge.svg)](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml)
-[![GPL-3.0 License](https://img.shields.io/github/license/VanOns/get-merged-pull-requests-action)](https://github.com/VanOns/get-merged-pull-requests-action/blob/main/LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/VanOns/get-merged-pull-requests-action?sort=semver)](https://github.com/VanOns/get-merged-pull-requests-action/releases/latest)
+[![Latest version](https://img.shields.io/github/release/VanOns/get-merged-pull-requests-action.svg?style=flat-square)](https://github.com/VanOns/get-merged-pull-requests-action/releases)
+[![Tests](https://img.shields.io/github/actions/workflow/status/VanOns/get-merged-pull-requests-action/test.yml?style=flat-square)](https://github.com/VanOns/get-merged-pull-requests-action/actions/workflows/test.yml)
+[![Issues](https://img.shields.io/github/issues/VanOns/get-merged-pull-requests-action?style=flat-square)](https://github.com/VanOns/get-merged-pull-requests-action/issues)
+[![License](https://img.shields.io/github/license/VanOns/get-merged-pull-requests-action?style=flat-square)](https://github.com/VanOns/get-merged-pull-requests-action/blob/main/LICENSE.md)
+
 
 <!-- start description -->
 
