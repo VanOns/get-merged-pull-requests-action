@@ -14,16 +14,13 @@ updates:
     labels:
       - dependencies
 
-  - package-ecosystem: github-actions
+  - package-ecosystem: npm
     target-branch: 'release/v1'
     directory: /
     schedule:
       interval: weekly
     labels:
       - dependencies
-
-  - package-ecosystem: npm
-    target-branch: 'release/v1'
-    directory: /
-    schedule:
-      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
