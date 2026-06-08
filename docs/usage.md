@@ -1,4 +1,4 @@
-# Basic usage
+# Usage
 
 A fully filled-in example action would look like this:
 

@@ -1,8 +1,6 @@
-# GitHub Action: Get Merged Pull Requests
-
-## Contents
+# Table of contents
 
 1. [Introduction](introduction.md)
-2. [Basic usage](basic-usage.md)
+2. [Usage](usage.md)
 3. [Upgrading](upgrading.md)
 4. [Changelog](changelog.md)
