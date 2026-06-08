@@ -1,8 +1,19 @@
 {
   "name": "get-merged-pull-requests-action",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "GitHub action that compares two tags and retrieves all pull requests merged between them.",
+  "keywords": [
+    "github",
+    "actions",
+    "versioning"
+  ],
+  "license": "MIT",
+  "author": "Van Ons",
   "main": "lib/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VanOns/get-merged-pull-requests-action.git"
+  },
   "scripts": {
     "dev": "ts-node src/main.ts",
     "build": "tsc",
@@ -19,17 +30,6 @@
     "bump-major": "npm version major --no-git-tag-version && npm run all",
     "update-v1": "git tag -sfa v1 -m \"Update v1 tag\" && git push origin v1 --force"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VanOns/get-merged-pull-requests-action.git"
-  },
-  "keywords": [
-    "github",
-    "actions",
-    "versioning"
-  ],
-  "author": "Van Ons",
-  "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.1"
