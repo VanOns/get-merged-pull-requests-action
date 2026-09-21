@@ -40,7 +40,7 @@
     "@octokit/openapi-types": "^24.0.0",
     "@stylistic/eslint-plugin": "^4.4.0",
     "@types/node": "^25.9.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
     "@typescript-eslint/parser": "^8.69.0",
     "@vercel/ncc": "^0.45.0",
     "dotenv": "^16.5.0",
