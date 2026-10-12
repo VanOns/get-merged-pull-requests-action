@@ -38,9 +38,6 @@ export default defineConfig([
     },
 
     rules: {
-      'i18n-text/no-en': 'off',
-      'eslint-comments/no-use': 'off',
-      'import/no-namespace': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -70,7 +67,7 @@ export default defineConfig([
         }
       ],
 
-      '@stylistic/func-call-spacing': ['error', 'never'],
+      '@stylistic/function-call-spacing': ['error', 'never'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/semi': ['error', 'never'],
